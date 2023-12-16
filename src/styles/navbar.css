@@ -1,30 +1,30 @@
-.container-fluid {
-    background-color: #333;
-    color: white;
-  }
-  
+/* navbar.css */
 
-  
-  .col-6 {
-    width: 50%;
-  }
-  
-  .col-7 {
-    margin: 10px 0;
-  }
-  
-  span {
-    margin-left: 10px;
-  }
-  
-  a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-  
-  a:hover {
-    color: #ffcc00;
-  }
-  
+.bg-clr {
+  background-color: rgba(255, 255, 255, 0.361) !important;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.icons {
+  margin-top: 40px;
+  margin-bottom:37px ;
+  margin-left:13px ;
+}
+
+span {
+  margin-left: 10px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: #ffcc00;
+}
