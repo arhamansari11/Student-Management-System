@@ -1,8 +1,9 @@
+import Routing from "./routing/Routing";
 
 function App() {
   return (
     <>
-    Muhammad Arham
+      <Routing />
     </>
   );
 }

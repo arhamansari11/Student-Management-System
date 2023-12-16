@@ -1,0 +1,30 @@
+.container-fluid {
+    background-color: #333;
+    color: white;
+  }
+  
+
+  
+  .col-6 {
+    width: 50%;
+  }
+  
+  .col-7 {
+    margin: 10px 0;
+  }
+  
+  span {
+    margin-left: 10px;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  a:hover {
+    color: #ffcc00;
+  }
+  
