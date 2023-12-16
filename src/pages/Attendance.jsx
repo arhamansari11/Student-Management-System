@@ -1,12 +1,9 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import React from 'react'
 
 const Attendance = () => {
   return (
-    <>
-      <Navbar />
-    </>
-  );
-};
+    <div>Attendance</div>
+  )
+}
 
-export default Attendance;
+export default Attendance

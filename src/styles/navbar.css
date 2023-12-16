@@ -1,30 +1,62 @@
-/* navbar.css */
-
-.bg-clr {
-  background-color: rgba(255, 255, 255, 0.361) !important;
-}
-
-.col-6 {
-  width: 50%;
-}
-
-.icons {
-  margin-top: 40px;
-  margin-bottom:37px ;
-  margin-left:13px ;
-}
-
-span {
-  margin-left: 10px;
-}
-
-.nav-link {
-  color: white;
+* {
+  margin: 0;
+  padding: 0;
   text-decoration: none;
+}
+
+body{
+  background-color: #333;
+  color: white;
+}
+.containe {
+  display: flex;
+}
+
+main {
+  width: 100%;
+  padding: 20px;
+}
+
+.sidebar {
+  background-color: rgba(255, 255, 255, 0.361) !important;
+  color: white;
+  height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
+}
+
+.top_section {
   display: flex;
   align-items: center;
+  padding: 20px 15px;
 }
 
-.nav-link:hover {
+.logo {
+  font-size: 30px;
+}
+
+.bars {
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+.link {
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+  text-decoration: none; 
+}
+
+.link:hover {
   color: #ffcc00;
+  transition: all 0.5s;
+}
+
+
+.icon,
+.link_text {
+  font-size: 20px;
 }

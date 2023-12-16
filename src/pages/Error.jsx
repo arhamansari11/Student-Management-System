@@ -1,13 +1,9 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import React from 'react'
 
 const Error = () => {
   return (
-    <>
-      <Navbar />
-      Error 404 Page not Found
-    </>
-  );
-};
+    <div>Error</div>
+  )
+}
 
-export default Error;
+export default Error
