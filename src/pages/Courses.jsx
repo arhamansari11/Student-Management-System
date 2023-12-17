@@ -223,7 +223,7 @@ const Courses = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
       <div className="container-fluid mt-3">
         <div className="row">
@@ -244,34 +244,34 @@ const Courses = () => {
                     <td>{course.title}</td>
                     <td>{course.description}</td>
                     <td>{course.code}</td>
-                    <td>
-                      <MdDelete
-                        onClick={() => deleteCourse(course.id, course.title)}
-                        style={{
-                          cursor: "pointer",
-                          color: "red",
-                          fontSize: "22px",
-                        }}
-                      />
-                      <MdEdit
-                        data-bs-toggle="modal"
-                        data-bs-target="#updateCourseModal"
-                        onClick={() =>
-                          updatedValues(
-                            course.id,
-                            course.title,
-                            course.description,
-                            course.code
-                          )
-                        }
-                        style={{
-                          cursor: "pointer",
-                          color: "blue",
-                          fontSize: "22px",
-                          marginLeft: "20px",
-                        }}
-                      />
-                    </td>
+                      <td>
+                        <MdDelete
+                          onClick={() => deleteCourse(course.id, course.title)}
+                          style={{
+                            cursor: "pointer",
+                            color: "red",
+                            fontSize: "22px",
+                          }}
+                        />
+                        <MdEdit
+                          data-bs-toggle="modal"
+                          data-bs-target="#updateCourseModal"
+                          onClick={() =>
+                            updatedValues(
+                              course.id,
+                              course.title,
+                              course.description,
+                              course.code
+                            )
+                          }
+                          style={{
+                            cursor: "pointer",
+                            color: "blue",
+                            fontSize: "22px",
+                            marginLeft: "20px",
+                          }}
+                        />
+                      </td>
                   </tr>
                 ))}
                 {loading && (
@@ -358,7 +358,7 @@ const Courses = () => {
                     type="text"
                     id="updateFormExample3"
                     className="form-control"
-                    placeholder="Enter Updated Code"
+                    placeholder="Enter Updated Code"  
                     onChange={(e) => setNewCode(e.target.value)}
                     value={newCode}
                   />
