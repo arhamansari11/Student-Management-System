@@ -28,12 +28,21 @@ main {
 .top_section {
   display: flex;
   align-items: center;
-  padding: 20px 15px;
+  /* padding: 20px 15px; */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .logo {
+  padding-top: 10px;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 .bars {
   display: flex;
