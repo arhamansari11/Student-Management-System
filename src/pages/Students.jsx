@@ -6,6 +6,7 @@ import {
   deleteDoc,
   doc,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,8 +14,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Space, Alert, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 const { confirm } = Modal;
-
-
 
 const Students = () => {
   // Read Data
@@ -56,17 +55,21 @@ const Students = () => {
       pauseOnHover: true,
       draggable: true,
     });
+    setName("");
+    setEmail("");
+    setGender("");
+    setContact("");
   };
 
   // Del Data
   const deleteStudent = async (id, studentName) => {
     const result = await confirm({
-      title: 'Confirm Deletion',
+      title: "Confirm Deletion",
       icon: <ExclamationCircleOutlined />,
       content: `Are you sure you want to delete ${studentName}?`,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
       onOk: async () => {
         await deleteDoc(doc(db, "students", id));
         getStudent();
@@ -82,7 +85,41 @@ const Students = () => {
       onCancel: () => {},
     });
   };
-  
+
+  // Update Data
+  const [updateId, setUpdateId] = useState(null);
+  const [newname, setNewname] = useState("");
+  const [newemail, setNewemail] = useState("");
+  const [newgender, setNewgender] = useState("");
+  const [newcontact, setNewcontact] = useState("");
+
+  const updatedValues = (id, name, email, gender, contact) => {
+    setUpdateId(id);
+    setNewname(name);
+    setNewemail(email);
+    setNewgender(gender);
+    setNewcontact(contact);
+  };
+
+  const setUpdateValues = async () => {
+    const newdoc = doc(db, "students", updateId);
+    await updateDoc(newdoc, {
+      name: newname,
+      email: newemail,
+      gender: newgender,
+      contact: newcontact,
+    });
+    setUpdateId(null);
+    getStudent();
+    toast.success("Student Updated successfully!", {
+      position: "top-right",
+      autoClose: 3000, // 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   return (
     <div>
@@ -92,7 +129,7 @@ const Students = () => {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        Add Student
+        Add New Student
       </button>
       <div
         className="modal fade"
@@ -229,6 +266,17 @@ const Students = () => {
                         }}
                       />
                       <MdEdit
+                        data-bs-toggle="modal"
+                        data-bs-target="#updateStudentModal"
+                        onClick={() =>
+                          updatedValues(
+                            student.id,
+                            student.name,
+                            student.email,
+                            student.gender,
+                            student.contact
+                          )
+                        }
                         style={{
                           cursor: "pointer",
                           color: "blue",
@@ -241,6 +289,115 @@ const Students = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+      {/* Update Student Modal */}
+      <div
+        className="modal fade"
+        id="updateStudentModal"
+        tabIndex="-1"
+        aria-labelledby="updateStudentModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title text-dark" id="updateStudentModalLabel">
+                Update Student
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="form-outline mb-3">
+                  <label
+                    className="form-label text-dark"
+                    htmlFor="updateFormExample1"
+                  >
+                    Updated Email address
+                  </label>
+                  <input
+                    type="email"
+                    id="updateFormExample1"
+                    className="form-control"
+                    placeholder="Enter Updated Email"
+                    onChange={(e) => setNewemail(e.target.value)}
+                    value={newemail}
+                  />
+                </div>
+                <div className="form-outline mb-3">
+                  <label
+                    className="form-label text-dark"
+                    htmlFor="updateFormExample2"
+                  >
+                    Updated Name
+                  </label>
+                  <input
+                    type="text"
+                    id="updateFormExample2"
+                    className="form-control"
+                    placeholder="Enter Updated Name"
+                    onChange={(e) => setNewname(e.target.value)}
+                    value={newname}
+                  />
+                </div>
+                <div className="form-outline mb-3">
+                  <label
+                    className="form-label text-dark"
+                    htmlFor="updateFormExample3"
+                  >
+                    Updated Gender
+                  </label>
+                  <input
+                    type="text"
+                    id="updateFormExample3"
+                    className="form-control"
+                    placeholder="Enter Updated Gender"
+                    onChange={(e) => setNewgender(e.target.value)}
+                    value={newgender}
+                  />
+                </div>
+                <div className="form-outline mb-3">
+                  <label
+                    className="form-label text-dark"
+                    htmlFor="updateFormExample4"
+                  >
+                    Updated Number
+                  </label>
+                  <input
+                    type="number"
+                    id="updateFormExample4"
+                    className="form-control"
+                    placeholder="Enter Updated Number"
+                    onChange={(e) => setNewcontact(e.target.value)}
+                    value={newcontact}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                onClick={setUpdateValues}
+              >
+                Update Student
+              </button>
+            </div>
           </div>
         </div>
       </div>
