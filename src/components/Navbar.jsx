@@ -4,7 +4,7 @@ import {
     FaBars,
     FaUserAlt,
     FaRegChartBar,
-    FaCommentAlt
+    FaBookOpen 
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import "../styles/navbar.css"; 
@@ -32,14 +32,14 @@ const Navbar = ({children}) => {
         {
             path:"/courses",
             name:"Courses",
-            icon:<FaCommentAlt/>
+            icon:<FaBookOpen />
         }
     ]
     return (
         <div className="containe">
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
+                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Admin Panne</h1>
                    <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
                        <FaBars onClick={toggle} style={{cursor : 'pointer'}}/>
                    </div>
