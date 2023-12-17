@@ -5,11 +5,11 @@ import { db } from "../config/firebase";
 const Attendance = () => {
   // Students Data
   const [students, setStudents] = useState([]);
-  const collectionRef = collection(db, "students");
+  const collectionR = collection(db, "students");
 
   const getStudent = async () => {
     try {
-      const data = await getDocs(collectionRef);
+      const data = await getDocs(collectionR);
       const filteredData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -121,13 +121,32 @@ const Attendance = () => {
                       Select Course
                     </option>
                     {courses.map((courses) => (
-                      <option key={courses.id} value={courses.id} className="text-dark">
+                      <option
+                        key={courses.id}
+                        value={courses.id}
+                        className="text-dark"
+                      >
                         {courses.title}
                       </option>
                     ))}
                   </select>
                 </div>
-
+                <div className="form-outline mb-3">
+                  <label
+                    className="form-label text-dark"
+                    htmlFor="form2Example4"
+                  >
+                    Date
+                  </label>
+                  <br />
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="attendanceDate"
+                    name="attendanceDate"
+                    style={{cursor : "pointer"}}
+                  />
+                </div>
                 <div className="form-outline mb-3">
                   <label
                     className="form-label text-dark"
@@ -136,9 +155,34 @@ const Attendance = () => {
                     Attendance
                   </label>
                   <br />
-                  <label htmlFor="" className="text-dark">Present</label>
-                  <input type="checkbox"/>
-
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="attendance"
+                      id="absent"
+                    />
+                    <label
+                      className="form-check-label text-dark"
+                      htmlFor="absent"
+                    >
+                      Absent
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="attendance"
+                      id="present"
+                    />
+                    <label
+                      className="form-check-label text-dark"
+                      htmlFor="present"
+                    >
+                      Present
+                    </label>
+                  </div>
                 </div>
               </form>
             </div>
