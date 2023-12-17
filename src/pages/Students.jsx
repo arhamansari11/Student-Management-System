@@ -301,11 +301,10 @@ const Students = () => {
                 ))}
                 {loading && (
                   <tr>
-                    <td
-                      colSpan="5"
-                      style={{ textAlign: "center"}}
-                    >
-                      <span style={{ fontSize: "1.5rem" }}>DATA FETCHING ...</span>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      <span style={{ fontSize: "1.5rem" }}>
+                        DATA FETCHING ...
+                      </span>
                       <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div>
