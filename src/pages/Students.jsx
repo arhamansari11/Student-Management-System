@@ -19,18 +19,30 @@ const Students = () => {
   // Read Data
   const [students, setStudents] = useState([]);
   const collectionRef = collection(db, "students");
+  const [loading, setLoading] = useState(true);
 
   const getStudent = async () => {
-    const data = await getDocs(collectionRef);
-    const filteredData = data.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setStudents(filteredData);
+    try {
+      setLoading(true); // Set loading to true before fetching data
+      const data = await getDocs(collectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setStudents(filteredData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Handle the error, you might want to show an error message to the user
+    } finally {
+      setLoading(false); // Set loading to false once data is fetched
+    }
   };
 
   useEffect(() => {
-    getStudent();
+    const fetchData = async () => {
+      await getStudent();
+    };
+    fetchData();
   }, []);
 
   // Create Data
@@ -287,6 +299,19 @@ const Students = () => {
                     </td>
                   </tr>
                 ))}
+                {loading && (
+                  <tr>
+                    <td
+                      colSpan="5"
+                      style={{ textAlign: "center"}}
+                    >
+                      <span style={{ fontSize: "1.5rem" }}>DATA FETCHING ...</span>
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -303,7 +328,10 @@ const Students = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title text-dark" id="updateStudentModalLabel">
+              <h5
+                className="modal-title text-dark"
+                id="updateStudentModalLabel"
+              >
                 Update Student
               </h5>
               <button
