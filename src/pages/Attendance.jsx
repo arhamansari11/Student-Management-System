@@ -205,7 +205,7 @@ const Attendance = () => {
     <>
       <button
         type="button"
-        className="btn btn-primary"
+        className="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
@@ -453,12 +453,12 @@ const Attendance = () => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5
-                  className="modal-title text-dark"
+                <h1
+                  className="modal-title fs-5 text-dark"
                   id="updateCourseModalLabel"
                 >
                   Update Attendance
-                </h5>
+                </h1>
                 <button
                   type="button"
                   className="btn-close"
@@ -475,14 +475,21 @@ const Attendance = () => {
                     >
                       Updated Student Name
                     </label>
-                    <input
-                      type="text"
-                      id="updateFormExample1"
-                      className="form-control"
-                      placeholder="Enter Updated Student Name"
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
                       onChange={(e) => setNewStudentName(e.target.value)}
                       value={newStudentName}
-                    />
+                    >
+                      <option value="" disabled>
+                        Select Student
+                      </option>
+                      {students.map((student) => (
+                        <option key={student.id} value={student.id}>
+                          {student.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="form-outline mb-3">
                     <label
@@ -491,14 +498,21 @@ const Attendance = () => {
                     >
                       Updated Course Name
                     </label>
-                    <input
-                      type="text"
-                      id="updateFormExample2"
-                      className="form-control"
-                      placeholder="Enter Updated Course Name"
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
                       onChange={(e) => setNewCourseName(e.target.value)}
                       value={newCourseName}
-                    />
+                    >
+                      <option value="" disabled>
+                        Select Course
+                      </option>
+                      {courses.map((course) => (
+                        <option key={course.id} value={course.id}>
+                          {course.title}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="form-outline mb-3">
                     <label
@@ -508,10 +522,11 @@ const Attendance = () => {
                       Updated Date
                     </label>
                     <input
-                      type="text"
-                      id="updateFormExample3"
+                      type="date"
                       className="form-control"
-                      placeholder="Enter Updated Date"
+                      id="updateAttendanceDate"
+                      name="updateAttendanceDate"
+                      style={{ cursor: "pointer" }}
                       onChange={(e) => setNewDate(e.target.value)}
                       value={newDate}
                     />
@@ -521,16 +536,41 @@ const Attendance = () => {
                       className="form-label text-dark"
                       htmlFor="updateFormExample4"
                     >
-                      Updated Attendance Status
+                      Updated Attendance
                     </label>
-                    <input
-                      type="text"
-                      id="updateFormExample4"
-                      className="form-control"
-                      placeholder="Enter Updated Attendance Status"
-                      onChange={(e) => setNewAttendanceStatus(e.target.value)}
-                      value={newAttendanceStatus}
-                    />
+                    <br />
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="updateAttendance"
+                        id="updateAbsent"
+                        onChange={() => setNewAttendanceStatus("Absent")}
+                        checked={newAttendanceStatus === "Absent"}
+                      />
+                      <label
+                        className="form-check-label text-dark"
+                        htmlFor="updateAbsent"
+                      >
+                        Absent
+                      </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="updateAttendance"
+                        id="updatePresent"
+                        onChange={() => setNewAttendanceStatus("Present")}
+                        checked={newAttendanceStatus === "Present"}
+                      />
+                      <label
+                        className="form-check-label text-dark"
+                        htmlFor="updatePresent"
+                      >
+                        Present
+                      </label>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -548,7 +588,7 @@ const Attendance = () => {
                   data-bs-dismiss="modal"
                   onClick={setUpdateValues}
                 >
-                  Update Course
+                  Update Attendance
                 </button>
               </div>
             </div>
