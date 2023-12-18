@@ -157,7 +157,7 @@ const Dashboard = () => {
       <div className="container mt-5">
         <div className="row">
           <div className="col-10 mx-auto">
-          <canvas ref={chartRef}></canvas>
+          <canvas ref={chartRef} ></canvas>
           </div>
         </div>
       </div>
