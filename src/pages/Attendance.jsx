@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import {
   collection,
   getDocs,
@@ -158,219 +158,8 @@ const Attendance = () => {
       onCancel: () => {},
     });
   };
-
-  // Updated state names for the update modal
-  const [updateId, setUpdateId] = useState(null);
-  const [newStudentName, setNewStudentName] = useState("");
-  const [newCourseName, setNewCourseName] = useState("");
-  const [newDate, setNewDate] = useState("");
-  const [newAttendanceStatus, setNewAttendanceStatus] = useState("");
-
-  // ... (rest of the code remains the same)
-
-  // Update Data
-  const updatedValues = (id, stname, crname, date, attendance) => {
-    setUpdateId(id);
-    setNewStudentName(stname);
-    setNewCourseName(crname);
-    setNewDate(date);
-    setNewAttendanceStatus(attendance);
-  };
-
-  const setUpdateValues = async () => {
-    try {
-      const newdoc = doc(db, "attendance", updateId);
-      await updateDoc(newdoc, {
-        stname: newStudentName,
-        crname: newCourseName,
-        date: newDate,
-        attendance: newAttendanceStatus,
-      });
-      setUpdateId(null);
-      getAttendanceData();
-      toast.success("Attendance updated successfully!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
-    } catch (error) {
-      console.error("Error updating attendance data:", error);
-    }
-  };
-
   return (
     <>
-      <button
-        type="button"
-        className="btn btn-success"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Record Attendance
-      </button>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5 text-dark" id="exampleModalLabel">
-                Record Attendance
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example1"
-                  >
-                    All Student Name
-                  </label>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      console.log("Selected Student:", e.target.value);
-                      setSelectedStudent(e.target.value);
-                    }}
-                    value={selectedStudent}
-                  >
-                    <option value="" disabled>
-                      Select Student
-                    </option>
-                    {students.map((student) => (
-                      <option key={student.id} value={student.id}>
-                        {student.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example2"
-                  >
-                    Name
-                  </label>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={(e) => {
-                      console.log("Selected Course:", e.target.value);
-                      setSelectedCourse(e.target.value);
-                    }}
-                    value={selectedCourse}
-                  >
-                    <option value="" disabled>
-                      Select Course
-                    </option>
-                    {courses.map((course) => (
-                      <option
-                        key={course.id}
-                        value={course.id}
-                        className="text-dark"
-                      >
-                        {course.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example4"
-                  >
-                    Date
-                  </label>
-                  <br />
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="attendanceDate"
-                    name="attendanceDate"
-                    style={{ cursor: "pointer" }}
-                    onChange={(e) => setAttendanceDate(e.target.value)}
-                    value={attendanceDate}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example4"
-                  >
-                    Attendance
-                  </label>
-                  <br />
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="attendance"
-                      id="absent"
-                      onChange={() => setAttendanceStatus("Absent")}
-                      checked={attendanceStatus === "Absent"}
-                    />
-                    <label
-                      className="form-check-label text-dark"
-                      htmlFor="absent"
-                    >
-                      Absent
-                    </label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="attendance"
-                      id="present"
-                      onChange={() => setAttendanceStatus("Present")}
-                      checked={attendanceStatus === "Present"}
-                    />
-                    <label
-                      className="form-check-label text-dark"
-                      htmlFor="present"
-                    >
-                      Present
-                    </label>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-dismiss="modal"
-                onClick={handleConfirmAttendance}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-12">
@@ -401,26 +190,7 @@ const Attendance = () => {
                           cursor: "pointer",
                           color: "red",
                           fontSize: "22px",
-                        }}
-                      />
-
-                      <MdEdit
-                        data-bs-toggle="modal"
-                        data-bs-target="#updateCourseModal"
-                        onClick={() =>
-                          updatedValues(
-                            attendance.id,
-                            attendance.stname,
-                            attendance.crname,
-                            attendance.date,
-                            attendance.attendance
-                          )
-                        }
-                        style={{
-                          cursor: "pointer",
-                          color: "blue",
-                          fontSize: "22px",
-                          marginLeft: "20px",
+                          marginLeft : "20px"
                         }}
                       />
                     </td>
@@ -442,154 +212,179 @@ const Attendance = () => {
             </table>
           </div>
         </div>
-        {/* Update Attendance Modal */}
-        <div
-          className="modal fade"
-          id="updateCourseModal"
-          tabIndex="-1"
-          aria-labelledby="updateCourseModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1
-                  className="modal-title fs-5 text-dark"
-                  id="updateCourseModalLabel"
-                >
-                  Update Attendance
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-outline mb-3">
-                    <label
-                      className="form-label text-dark"
-                      htmlFor="updateFormExample1"
-                    >
-                      Updated Student Name
-                    </label>
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      onChange={(e) => setNewStudentName(e.target.value)}
-                      value={newStudentName}
-                    >
-                      <option value="" disabled>
-                        Select Student
-                      </option>
-                      {students.map((student) => (
-                        <option key={student.id} value={student.id}>
-                          {student.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-outline mb-3">
-                    <label
-                      className="form-label text-dark"
-                      htmlFor="updateFormExample2"
-                    >
-                      Updated Course Name
-                    </label>
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      onChange={(e) => setNewCourseName(e.target.value)}
-                      value={newCourseName}
-                    >
-                      <option value="" disabled>
-                        Select Course
-                      </option>
-                      {courses.map((course) => (
-                        <option key={course.id} value={course.id}>
-                          {course.title}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-outline mb-3">
-                    <label
-                      className="form-label text-dark"
-                      htmlFor="updateFormExample3"
-                    >
-                      Updated Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="updateAttendanceDate"
-                      name="updateAttendanceDate"
-                      style={{ cursor: "pointer" }}
-                      onChange={(e) => setNewDate(e.target.value)}
-                      value={newDate}
-                    />
-                  </div>
-                  <div className="form-outline mb-3">
-                    <label
-                      className="form-label text-dark"
-                      htmlFor="updateFormExample4"
-                    >
-                      Updated Attendance
-                    </label>
-                    <br />
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="updateAttendance"
-                        id="updateAbsent"
-                        onChange={() => setNewAttendanceStatus("Absent")}
-                        checked={newAttendanceStatus === "Absent"}
-                      />
-                      <label
-                        className="form-check-label text-dark"
-                        htmlFor="updateAbsent"
+
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-2 ms-auto">
+              <button
+                type="button"
+                className="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Record Attendance
+              </button>
+              <div
+                className="modal fade"
+                id="exampleModal"
+                tabIndex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1
+                        className="modal-title fs-5 text-dark"
+                        id="exampleModalLabel"
                       >
-                        Absent
-                      </label>
+                        Record Attendance
+                      </h1>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
                     </div>
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="updateAttendance"
-                        id="updatePresent"
-                        onChange={() => setNewAttendanceStatus("Present")}
-                        checked={newAttendanceStatus === "Present"}
-                      />
-                      <label
-                        className="form-check-label text-dark"
-                        htmlFor="updatePresent"
+                    <div className="modal-body">
+                      <form>
+                        <div className="form-outline mb-3">
+                          <label
+                            className="form-label text-dark"
+                            htmlFor="form2Example1"
+                          >
+                            All Student Name
+                          </label>
+                          <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              console.log("Selected Student:", e.target.value);
+                              setSelectedStudent(e.target.value);
+                            }}
+                            value={selectedStudent}
+                          >
+                            <option value="" disabled>
+                              Select Student
+                            </option>
+                            {students.map((student) => (
+                              <option key={student.id} value={student.id}>
+                                {student.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="form-outline mb-3">
+                          <label
+                            className="form-label text-dark"
+                            htmlFor="form2Example2"
+                          >
+                            Name
+                          </label>
+                          <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            onChange={(e) => {
+                              console.log("Selected Course:", e.target.value);
+                              setSelectedCourse(e.target.value);
+                            }}
+                            value={selectedCourse}
+                          >
+                            <option value="" disabled>
+                              Select Course
+                            </option>
+                            {courses.map((course) => (
+                              <option
+                                key={course.id}
+                                value={course.id}
+                                className="text-dark"
+                              >
+                                {course.title}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="form-outline mb-3">
+                          <label
+                            className="form-label text-dark"
+                            htmlFor="form2Example4"
+                          >
+                            Date
+                          </label>
+                          <br />
+                          <input
+                            type="date"
+                            className="form-control"
+                            id="attendanceDate"
+                            name="attendanceDate"
+                            style={{ cursor: "pointer" }}
+                            onChange={(e) => setAttendanceDate(e.target.value)}
+                            value={attendanceDate}
+                          />
+                        </div>
+                        <div className="form-outline mb-3">
+                          <label
+                            className="form-label text-dark"
+                            htmlFor="form2Example4"
+                          >
+                            Attendance
+                          </label>
+                          <br />
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="attendance"
+                              id="absent"
+                              onChange={() => setAttendanceStatus("Absent")}
+                              checked={attendanceStatus === "Absent"}
+                            />
+                            <label
+                              className="form-check-label text-dark"
+                              htmlFor="absent"
+                            >
+                              Absent
+                            </label>
+                          </div>
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="attendance"
+                              id="present"
+                              onChange={() => setAttendanceStatus("Present")}
+                              checked={attendanceStatus === "Present"}
+                            />
+                            <label
+                              className="form-check-label text-dark"
+                              htmlFor="present"
+                            >
+                              Present
+                            </label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
                       >
-                        Present
-                      </label>
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        data-bs-dismiss="modal"
+                        onClick={handleConfirmAttendance}
+                      >
+                        Confirm
+                      </button>
                     </div>
                   </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  onClick={setUpdateValues}
-                >
-                  Update Attendance
-                </button>
+                </div>
               </div>
             </div>
           </div>

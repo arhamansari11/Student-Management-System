@@ -135,118 +135,6 @@ const Students = () => {
 
   return (
     <div>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Add New Student
-      </button>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5 text-dark" id="exampleModalLabel">
-                Add Student
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example1"
-                  >
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    id="form2Example1"
-                    className="form-control"
-                    placeholder="Enter Your Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example2"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="form2Example2"
-                    className="form-control"
-                    placeholder="Enter Your Name"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example3"
-                  >
-                    Gender
-                  </label>
-                  <input
-                    type="text"
-                    id="form2Example3"
-                    className="form-control"
-                    placeholder="Enter Your Gender"
-                    onChange={(e) => setGender(e.target.value)}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example4"
-                  >
-                    Number
-                  </label>
-                  <input
-                    type="number"
-                    id="form2Example4"
-                    className="form-control"
-                    placeholder="Enter Your Number"
-                    onChange={(e) => setContact(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-dismiss="modal"
-                onClick={submitData}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-12">
@@ -424,6 +312,128 @@ const Students = () => {
               >
                 Update Student
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2 ms-auto">
+            <button
+              type="button"
+              className="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Add New Student
+            </button>
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1
+                      className="modal-title fs-5 text-dark"
+                      id="exampleModalLabel"
+                    >
+                      Add Student
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example1"
+                        >
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          id="form2Example1"
+                          className="form-control"
+                          placeholder="Enter Your Email"
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example2"
+                        >
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          id="form2Example2"
+                          className="form-control"
+                          placeholder="Enter Your Name"
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example3"
+                        >
+                          Gender
+                        </label>
+                        <input
+                          type="text"
+                          id="form2Example3"
+                          className="form-control"
+                          placeholder="Enter Your Gender"
+                          onChange={(e) => setGender(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example4"
+                        >
+                          Number
+                        </label>
+                        <input
+                          type="number"
+                          id="form2Example4"
+                          className="form-control"
+                          placeholder="Enter Your Number"
+                          onChange={(e) => setContact(e.target.value)}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal"
+                      onClick={submitData}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

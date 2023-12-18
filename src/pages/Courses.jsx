@@ -128,103 +128,6 @@ const Courses = () => {
 
   return (
     <div>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Add New Course
-      </button>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5 text-dark" id="exampleModalLabel">
-                Add Course
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example1"
-                  >
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    id="form2Example1"
-                    className="form-control"
-                    placeholder="Enter Course Title"
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example2"
-                  >
-                    Description
-                  </label>
-                  <input
-                    type="text"
-                    id="form2Example2"
-                    className="form-control"
-                    placeholder="Enter Course Description"
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
-                <div className="form-outline mb-3">
-                  <label
-                    className="form-label text-dark"
-                    htmlFor="form2Example3"
-                  >
-                    Code
-                  </label>
-                  <input
-                    type="text"
-                    id="form2Example3"
-                    className="form-control"
-                    placeholder="Enter Course Code"
-                    onChange={(e) => setCode(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-dismiss="modal"
-                onClick={submitData}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>  
-      </div>
       <div className="container-fluid mt-3">
         <div className="row">
           <div className="col-12">
@@ -244,40 +147,42 @@ const Courses = () => {
                     <td>{course.title}</td>
                     <td>{course.description}</td>
                     <td>{course.code}</td>
-                      <td>
-                        <MdDelete
-                          onClick={() => deleteCourse(course.id, course.title)}
-                          style={{
-                            cursor: "pointer",
-                            color: "red",
-                            fontSize: "22px",
-                          }}
-                        />
-                        <MdEdit
-                          data-bs-toggle="modal"
-                          data-bs-target="#updateCourseModal"
-                          onClick={() =>
-                            updatedValues(
-                              course.id,
-                              course.title,
-                              course.description,
-                              course.code
-                            )
-                          }
-                          style={{
-                            cursor: "pointer",
-                            color: "blue",
-                            fontSize: "22px",
-                            marginLeft: "20px",
-                          }}
-                        />
-                      </td>
+                    <td>
+                      <MdDelete
+                        onClick={() => deleteCourse(course.id, course.title)}
+                        style={{
+                          cursor: "pointer",
+                          color: "red",
+                          fontSize: "22px",
+                        }}
+                      />
+                      <MdEdit
+                        data-bs-toggle="modal"
+                        data-bs-target="#updateCourseModal"
+                        onClick={() =>
+                          updatedValues(
+                            course.id,
+                            course.title,
+                            course.description,
+                            course.code
+                          )
+                        }
+                        style={{
+                          cursor: "pointer",
+                          color: "blue",
+                          fontSize: "22px",
+                          marginLeft: "20px",
+                        }}
+                      />
+                    </td>
                   </tr>
                 ))}
                 {loading && (
                   <tr>
                     <td colSpan="4" style={{ textAlign: "center" }}>
-                      <span style={{ fontSize: "1.5rem" }}>DATA FETCHING ...</span>
+                      <span style={{ fontSize: "1.5rem" }}>
+                        DATA FETCHING ...
+                      </span>
                       <div className="spinner-border" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </div>
@@ -300,10 +205,7 @@ const Courses = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5
-                className="modal-title text-dark"
-                id="updateCourseModalLabel"
-              >
+              <h5 className="modal-title text-dark" id="updateCourseModalLabel">
                 Update Course
               </h5>
               <button
@@ -358,7 +260,7 @@ const Courses = () => {
                     type="text"
                     id="updateFormExample3"
                     className="form-control"
-                    placeholder="Enter Updated Code"  
+                    placeholder="Enter Updated Code"
                     onChange={(e) => setNewCode(e.target.value)}
                     value={newCode}
                   />
@@ -381,6 +283,113 @@ const Courses = () => {
               >
                 Update Course
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2 ms-auto">
+            <button
+              type="button"
+              className="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Add New Course
+            </button>
+            <div
+              className="modal fade"
+              id="exampleModal"
+              tabIndex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1
+                      className="modal-title fs-5 text-dark"
+                      id="exampleModalLabel"
+                    >
+                      Add Course
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example1"
+                        >
+                          Title
+                        </label>
+                        <input
+                          type="text"
+                          id="form2Example1"
+                          className="form-control"
+                          placeholder="Enter Course Title"
+                          onChange={(e) => setTitle(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example2"
+                        >
+                          Description
+                        </label>
+                        <input
+                          type="text"
+                          id="form2Example2"
+                          className="form-control"
+                          placeholder="Enter Course Description"
+                          onChange={(e) => setDescription(e.target.value)}
+                        />
+                      </div>
+                      <div className="form-outline mb-3">
+                        <label
+                          className="form-label text-dark"
+                          htmlFor="form2Example3"
+                        >
+                          Code
+                        </label>
+                        <input
+                          type="text"
+                          id="form2Example3"
+                          className="form-control"
+                          placeholder="Enter Course Code"
+                          onChange={(e) => setCode(e.target.value)}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal"
+                      onClick={submitData}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
